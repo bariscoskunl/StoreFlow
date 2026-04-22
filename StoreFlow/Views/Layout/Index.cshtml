@@ -12,14 +12,14 @@
             @await Component.InvokeAsync("_RightSidebarDashboardComponentPartial")
             @await Component.InvokeAsync("_SidebarDashboardComponentPartial")
             <div class="main-panel">
-                <div class="content-wrapper"> 
-                @RenderBody()
-                </div>  
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
                 @await Component.InvokeAsync("_LayoutFooterComponentPartial")
                 
-            </div>          
-        </div>        
-        @await Component.InvokeAsync("_LayoutScriptsComponentPartial")        
+            </div>
+        </div>
+        @await Component.InvokeAsync("_LayoutScriptsComponentPartial")
     </body>
 </html>
 

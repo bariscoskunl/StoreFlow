@@ -17,6 +17,25 @@ namespace StoreFlow.Context
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Todo> Todos { get; set; }
         public DbSet<Message> Messages { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Customer>()
+                .Property(x => x.CustomerBalance)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Product>()
+                .Property(x => x.ProductPrice)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Order>()
+                .Property(x => x.UnitPrice)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Order>()
+                .Property(x => x.TotalPrice)
+                .HasPrecision(18, 2);
+        }
     }
 }
