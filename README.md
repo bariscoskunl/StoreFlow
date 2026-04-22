@@ -26,7 +26,7 @@ Proje kapsamında 70'ten fazla metot aktif olarak kullanılmıştır:
 - **İstatistik Yönetimi:** Alt sorgular ve karmaşık LINQ gruplandırmaları ile anlık veri analizi.
 
 ## 📂 Kullanılan Teknolojiler
-- **Backend:** .NET 8 / ASP.NET Core MVC
+- **Backend:** .NET 9 / ASP.NET Core MVC
 - **ORM:** Entity Framework Core
 - **Database:** MS SQL Server
 - **Frontend:** Bootstrap, View Components, Partial Views
