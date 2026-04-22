@@ -6,7 +6,7 @@ StoreFlow, veri erişim katmanında **Entity Framework Core**'un tüm gücünü 
 StoreFlow; ürün, sipariş ve müşteri döngüsünü yöneten bir iş modeli üzerinden, sadece "çalışan kod" değil, "en optimize kod" prensibiyle kurgulanmıştır. Proje kapsamında 80'e yakın farklı EF Core ve LINQ metodu gerçek hayat senaryoları üzerinde uygulanmıştır.
 
 ## 🛠️ Teknolojik Yığın
-- **Framework:** .NET 8.0 (ASP.NET Core MVC)
+- **Framework:** .NET 9.0 (ASP.NET Core MVC)
 - **ORM:** Entity Framework Core (Code First)
 - **Database:** MS SQL Server
 - **UI/UX:** Bootstrap, Razor View Engine, ViewComponents
