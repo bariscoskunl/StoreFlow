@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>@ViewData["Title"] - StoreFlow Admin</title>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
+    <style>
+        /* Dashboard Layout Helper Styles */
+        body { background-color: #f3f3f3; }
+        .sidebar { min-height: 100vh; background: #ffffff; border-right: 1px solid #eeeeee; }
+        .nav-item .nav-link { color: #4e4e4e; display: flex; align-items: center; padding: 12px 20px; }
+        .nav-item .nav-link i { margin-right: 10px; font-size: 1.1rem; color: #737c89; }
+        .nav-item:hover .nav-link, .nav-item.active .nav-link { background: #f8f9fa; color: #3f51b5; }
+        .nav-item.active .nav-link i { color: #3f51b5; }
+        .main-panel { padding: 25px; width: 100%; }
+        .navbar-brand { font-weight: bold; color: #3f51b5 !important; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container-scroller">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <i class="mdi mdi-store mr-2"></i>StoreFlow
+                </a>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <span class="nav-link"><i class="mdi mdi-calendar"></i> @DateTime.Now.ToString("dd MMMM yyyy")</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid page-body-wrapper d-flex p-0">
+            <nav class="sidebar col-md-2 d-none d-md-block p-0">
+                <ul class="nav flex-column">
+                    <li class="nav-item border-bottom p-3">
+                        <small class="text-muted font-weight-bold">ANA MENÜ</small>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">
+                            <i class="mdi mdi-view-dashboard"></i> Dashboard
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item border-bottom p-3">
+                        <small class="text-muted font-weight-bold">YÖNETİM</small>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Product" asp-action="ProductList">
+                            <i class="mdi mdi-cube-outline"></i> Ürün Yönetimi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Customer" asp-action="CustomerList">
+                            <i class="mdi mdi-account-group"></i> Müşteri İşlemleri
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Order" asp-action="OrderList">
+                            <i class="mdi mdi-cart-outline"></i> Sipariş Takibi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Message" asp-action="MessageList">
+                            <i class="mdi mdi-email-outline"></i> Mesajlar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Todo" asp-action="TodoList">
+                            <i class="mdi mdi-playlist-check"></i> Görev Planlayıcı
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item border-bottom p-3 mt-2">
+                        <small class="text-muted font-weight-bold">SİSTEM</small>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Privacy">
+                            <i class="mdi mdi-shield-check-outline"></i> Gizlilik Politikası
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="main-panel col-md-10 bg-light">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+                
+                <footer class="footer mt-5 pt-3 border-top text-muted">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-center text-sm-left d-block d-sm-inline-block">
+                            &copy; 2026 <b>StoreFlow</b> - Tüm Hakları Saklıdır.
+                        </span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">
+                            Admin Panel <i class="mdi mdi-heart text-danger"></i>
+                        </span>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,92 @@
+﻿@model List<OrderStatusChartViewModel>
+@using Newtonsoft.Json
+
+@{
+    var statusLabels = Model.Select(x => x.Status).ToList();
+    var statusCounts = Model.Select(x => x.Count).ToList();
+}
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-6">
+                <i class="mdi mdi-package-variant text-primary mr-2"></i> Sipariş Durum Dağılımı
+            </h4>
+            
+            <div class="chart-container" style="position: relative; height:300px; width:100%">
+                <canvas id="orders-chart-status"></canvas>
+            </div>
+            
+            <div id="orders-chart-legend-status" class="mt-4">
+                <p class="text-muted small">
+                    <i class="mdi mdi-information-outline mr-1"></i>
+                    Sistemdeki siparişlerin güncel operasyonel durum grafiği yukarıda yer almaktadır.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    (function() {
+    const labels = @Html.Raw(JsonConvert.SerializeObject(statusLabels));
+    const counts = @Html.Raw(JsonConvert.SerializeObject(statusCounts));
+
+    // Eğer veri yoksa görsel bir uyarı verilebilir veya boş grafik gösterilebilir
+    if (labels.length === 0) {
+    console.log("Sipariş durumu verisi bulunamadı.");
+    }
+
+    const ctx = document.getElementById('orders-chart-status').getContext('2d');
+    const chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+    labels: labels,
+    datasets: [{
+    label: 'Sipariş Sayısı',
+    data: counts,
+    backgroundColor: [
+    'rgba(75, 192, 192, 0.7)',  // Turkuaz
+    'rgba(255, 159, 64, 0.7)',   // Turuncu
+    'rgba(255, 99, 132, 0.7)',   // Pembe/Kırmızı
+    'rgba(153, 102, 255, 0.7)',  // Mor
+    'rgba(54, 162, 235, 0.7)'    // Mavi
+    ],
+    borderColor: '#ffffff',
+    borderWidth: 2,
+    hoverOffset: 10
+    }]
+    },
+    options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '70%', // Modern halka görünümü için
+    plugins: {
+    legend: {
+    position: 'bottom',
+    labels: {
+    usePointStyle: true,
+    padding: 20,
+    font: {
+    size: 12
+    }
+    }
+    },
+    tooltip: {
+    callbacks: {
+    label: function(context) {
+    let label = context.label || '';
+    let value = context.parsed || 0;
+    let total = context.dataset.data.reduce((a, b) => a + b, 0);
+    let percentage = Math.round((value / total) * 100);
+    return `${label}: ${value} Adet (%${percentage})`;
+    }
+    }
+    }
+    }
+    }
+    });
+    })();
+</script>

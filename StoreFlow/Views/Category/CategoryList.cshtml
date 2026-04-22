@@ -1,0 +1,56 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "CategoryList";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Kategori Listesi</h3>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Kategori Adı</th>
+                                <th>Durum</th>
+                                <th class="text-center">Sil</th>
+                                <th class="text-center">Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <th>@item.CategoryId</th>
+                                    <td>@item.CategoryName</td>
+                                    <td>
+                                        @if (item.CategoryStatus)
+                                        {
+                                            <span class="badge badge-success badge-pill">Aktif Kategori</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger badge-pill">Pasif Kategori</span>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        <a asp-controller="Category" asp-action="DeleteCategory" asp-route-id="@item.CategoryId" class="btn btn-outline-danger btn-sm">Sil</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a asp-controller="Category" asp-action="UpdateCategory" asp-route-id="@item.CategoryId" class="btn btn-outline-success btn-sm">Güncelle</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="mt-3">
+                        <a asp-controller="Category" asp-action="CreateCategory" class="btn btn-primary">Yeni Kategori Girişi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@model List<Message>
+
+<li class="nav-item dropdown">
+    <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+        <i class="mdi mdi-email-outline mx-0"></i>
+        @if (ViewBag.MessageCount > 0)
+        {
+            <span class="count bg-primary"></span>
+        }
+    </a>
+    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+        <div class="dropdown-item">
+            <p class="mb-0 font-weight-normal float-left">
+                @if (ViewBag.MessageCount > 0)
+                {
+                    <strong>@ViewBag.MessageCount</strong> <span>adet okunmamış mesajınız var</span>
+                }
+                else
+                {
+                    <span>Yeni mesajınız bulunmuyor</span>
+                }
+            </p>
+            <a asp-controller="Message" asp-action="MessageList" class="badge badge-info badge-pill float-right text-white" style="text-decoration: none;">Tümünü Gör</a>
+        </div>
+        
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item preview-item" asp-controller="Message" asp-action="MessageDetails" asp-route-id="@item.MessageId">
+                    <div class="preview-thumbnail">
+                        <img src="@(string.IsNullOrEmpty(item.SenderImageUrl) ? "/images/faces/default-user.png" : item.SenderImageUrl)" alt="image" class="profile-pic">
+                    </div>
+                    <div class="preview-item-content flex-grow">
+                        <h6 class="preview-subject ellipsis font-weight-medium text-dark">
+                            @item.SenderNameSurname
+                            <span class="float-right font-weight-light small-text text-muted">
+                                @(item.Datetime.Date == DateTime.Today ? item.Datetime.ToString("HH:mm") : item.Datetime.ToString("dd.MM.yyyy"))
+                            </span>
+                        </h6>
+                        <p class="font-weight-light small-text text-muted text-truncate" style="max-width: 200px;">
+                            @item.MessageTitle
+                        </p>
+                    </div>
+                </a>
+            }
+        }
+    </div>
+</li>

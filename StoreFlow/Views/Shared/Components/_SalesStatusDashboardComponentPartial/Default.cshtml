@@ -1,0 +1,78 @@
+﻿@model List<CustomerCityChartViewModel>
+@using Newtonsoft.Json
+
+@{
+    var cityLabels = Model.Select(x => x.City).ToList();
+    var cityCounts = Model.Select(x => x.Count).ToList();
+}
+
+<div class="col-md-4 grid-margin stretch-card">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title mb-4">
+                <i class="mdi mdi-map-marker-radius text-danger mr-2"></i> Şehirlere Göre Müşteri Dağılımı
+            </h4>
+            
+            <div class="chart-container" style="position: relative; height:300px; width:100%">
+                <canvas id="customer-city-chart"></canvas>
+            </div>
+
+            <div class="mt-4">
+                <p class="text-muted small text-center">
+                    <i class="mdi mdi-information-outline mr-1"></i>
+                    Sistemdeki müşterilerin şehirlere göre demografik dağılımı.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+    const labels = @Html.Raw(JsonConvert.SerializeObject(cityLabels));
+    const counts = @Html.Raw(JsonConvert.SerializeObject(cityCounts));
+
+    const ctx = document.getElementById('customer-city-chart').getContext('2d');
+        
+    new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+    labels: labels,
+    datasets: [{
+    label: 'Müşteri Sayısı',
+    data: counts,
+    backgroundColor: [
+    'rgba(255, 99, 132, 0.8)',
+    'rgba(54, 162, 235, 0.8)',
+    'rgba(255, 206, 86, 0.8)',
+    'rgba(75, 192, 192, 0.8)',
+    'rgba(153, 102, 255, 0.8)',
+    'rgba(255, 159, 64, 0.8)'
+    ],
+    borderColor: '#ffffff',
+    borderWidth: 2,
+    hoverOffset: 10
+    }]
+    },
+    options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: '65%',
+    plugins: {
+    legend: {
+    position: 'bottom',
+    labels: {
+    usePointStyle: true,
+    padding: 15,
+    font: {
+    size: 11
+    }
+    }
+    }
+    }
+    }
+    });
+    });
+</script>

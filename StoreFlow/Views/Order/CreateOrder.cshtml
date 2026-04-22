@@ -1,0 +1,68 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "CreateOrder";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-10 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yeni Sipariş Ekleme Sayfası</h4>
+                <p class="card-description">Sistem üzerinden yeni bir satış kaydı oluşturmak için aşağıdaki alanları doldurunuz.</p>
+                
+                <form class="forms-sample" method="post">
+                    <div class="form-group">
+                        <label for="productSelect">Ürün Seçiniz</label>
+                        <select id="productSelect" asp-for="ProductId" asp-items="@ViewBag.products" class="form-control text-dark">
+                            <option value="" disabled selected>Lütfen Ürün Seçiniz</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerSelect">Müşteri Seçiniz</label>
+                        <select id="customerSelect" asp-for="CustomerId" asp-items="@ViewBag.customers" class="form-control text-dark">
+                            <option value="" disabled selected>Lütfen Müşteri Seçiniz</option>
+                        </select>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="orderCount">Sipariş Adedi</label>
+                                <input type="number" class="form-control" id="orderCount" placeholder="Adet Giriniz" asp-for="OrderCount" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="unitPrice">Birim Fiyat</label>
+                                <div class="input-group">
+                                    <input type="number" step="0.01" class="form-control" id="unitPrice" placeholder="0.00" asp-for="UnitPrice" required />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-light text-dark">TL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="totalPrice">Toplam Fiyat</label>
+                                <div class="input-group">
+                                    <input type="number" step="0.01" class="form-control" id="totalPrice" placeholder="0.00" asp-for="TotalPrice" required />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-light text-dark">TL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary mr-2">Siparişi Oluştur</button>
+                        <a asp-action="OrderList" class="btn btn-light">İptal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

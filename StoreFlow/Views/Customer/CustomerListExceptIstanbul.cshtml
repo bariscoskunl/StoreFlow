@@ -1,0 +1,58 @@
+﻿@model List<Customer>
+
+@{
+    ViewData["Title"] = "CustomerListExceptIstanbul";
+    Layout = "~/Views/Layout/Index.cshtml";
+    int count = 0;
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Müşteri Listesi (İstanbul Dışında)</h3>
+                <p class="card-description">İstanbul şehri haricindeki tüm kayıtlı müşteriler listelenmektedir.</p>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Müşteri Adı Soyadı</th>
+                                <th>Müşteri Şehir / İlçe</th>
+                                <th>Bakiye</th>
+                                <th class="text-center">Sil</th>
+                                <th class="text-center">Güncelle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th>@count</th>
+                                    <td>@item.CustomerName @item.CustomerSurname</td>
+                                    <td>
+                                        <i class="mdi mdi-map-marker text-primary mr-1"></i>
+                                        @item.CustomerCity @item.CustomerDistrict
+                                    </td>
+                                    <td>
+                                        <span class="text-success font-weight-bold">@item.CustomerBalance.ToString("C2")</span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a asp-controller="Customer" asp-action="DeleteCustomer" asp-route-id="@item.CustomerId" class="btn btn-outline-danger btn-sm">Sil</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <a asp-controller="Customer" asp-action="UpdateCustomer" asp-route-id="@item.CustomerId" class="btn btn-outline-success btn-sm">Güncelle</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="mt-4">
+                        <a asp-controller="Customer" asp-action="CreateCustomer" class="btn btn-primary">Yeni Müşteri Girişi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

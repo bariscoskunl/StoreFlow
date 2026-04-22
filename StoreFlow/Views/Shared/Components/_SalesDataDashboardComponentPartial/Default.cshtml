@@ -1,0 +1,95 @@
+﻿@model List<Order>
+
+<div class="col-md-8 grid-margin stretch-card">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title">
+                <i class="mdi mdi-cart-check text-primary mr-2"></i>
+                Son Siparişler
+            </h4>
+            <p class="card-description">Sistem üzerinden gerçekleştirilen en son 5 satış işlemi.</p>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="font-weight-bold">Müşteri</th>
+                            <th class="font-weight-bold">Ürün</th>
+                            <th class="font-weight-bold text-center">Adet</th>
+                            <th class="font-weight-bold text-center">Durum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="font-weight-bold text-dark">
+                                        <i class="mdi mdi-account-outline mr-1 text-muted"></i>
+                                        @item.Customer.CustomerName @item.Customer.CustomerSurname
+                                    </td>
+                                    <td class="text-muted">
+                                        @item.Product.ProductName
+                                    </td>
+                                    <td class="text-center font-weight-medium">
+                                        @item.OrderCount
+                                    </td>
+                                    <td class="text-center">
+                                        @if (item.Status == "Taşıma Durumunda")
+                                        {
+                                            <label class="badge badge-warning badge-pill">Kargoda</label>
+                                        }
+                                        else if (item.Status == "İptal Edildi")
+                                        {
+                                            <label class="badge badge-danger badge-pill">İptal</label>
+                                        }
+                                        else if (item.Status == "Teslim Edildi")
+                                        {
+                                            <label class="badge badge-success badge-pill">Tamamlandı</label>
+                                        }
+                                        else if (item.Status == "Sipariş Alındı")
+                                        {
+                                            <label class="badge badge-primary badge-pill">Yeni</label>
+                                        }
+                                        else if (item.Status == "Ödeme Bekleniyor")
+                                        {
+                                            <label class="badge badge-info badge-pill">Beklemede</label>
+                                        }
+                                        else
+                                        {
+                                            <label class="badge badge-secondary badge-pill">@item.Status</label>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="4" class="text-center text-muted py-4">Henüz bir sipariş kaydı bulunmuyor.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4 pt-2 border-top">
+                <a asp-controller="Order" asp-action="OrderList" class="btn btn-link btn-sm p-0 text-primary font-weight-bold">Tüm Siparişleri Gör</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4 grid-margin stretch-card">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title">
+                <i class="mdi mdi-calendar-range text-info mr-2"></i>
+                İşlem Takvimi
+            </h4>
+            <div id="inline-datepicker-example" class="datepicker"></div>
+            <div class="mt-4 pt-3 border-top text-center text-muted">
+                <small><i class="mdi mdi-clock-outline mr-1"></i> Sistem Zamanı: @DateTime.Now.ToString("HH:mm")</small>
+            </div>
+        </div>
+    </div>
+</div>

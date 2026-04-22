@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "CustomerGetByCity";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Şehirde Müşteri Var Mı?</h4>
+                <form class="forms-sample" asp-action="CustomerGetByCity" method="get">
+                    <div class="form-group">
+                        <label for="cityInput">Şehir Adı Giriniz</label>
+                        <input type="text" class="form-control" id="cityInput" placeholder="Şehir Adını Yazınız" name="city" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">Müşteri Kontrol Et</button>
+                </form>
+
+                <div class="mt-4 @(TempData["message"] == null && TempData["error"] == null ? "d-none" : "")">
+                    @if (TempData["message"] != null)
+                    {
+                        <div class="alert alert-success d-flex align-items-center">
+                            <i class="mdi mdi-check-circle mr-2"></i> @TempData["message"]
+                        </div>
+                    }
+
+                    @if (TempData["error"] != null)
+                    {
+                        <div class="alert alert-danger d-flex align-items-center">
+                            <i class="mdi mdi-alert-circle mr-2"></i> @TempData["error"]
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

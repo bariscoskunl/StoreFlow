@@ -1,0 +1,79 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "UpdateOrder";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-10 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Sipariş Güncelleme Sayfası</h4>
+                <p class="card-description">Mevcut sipariş bilgilerini ve durumunu bu ekrandan düzenleyebilirsiniz.</p>
+                <form class="forms-sample" method="post">
+                    <input type="hidden" asp-for="OrderId" />
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="ProductSelect">Ürün Seçiniz</label>
+                                <select id="ProductSelect" asp-for="ProductId" asp-items="@ViewBag.products" class="form-control text-dark">
+                                    <option value="">Ürün Seçiniz</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="CustomerSelect">Müşteri Seçiniz</label>
+                                <select id="CustomerSelect" asp-for="CustomerId" asp-items="@ViewBag.customers" class="form-control text-dark">
+                                    <option value="">Müşteri Seçiniz</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="OrderCount">Sipariş Adedi</label>
+                                <input type="number" class="form-control" id="OrderCount" placeholder="Adet Giriniz" asp-for="OrderCount" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="UnitPrice">Birim Fiyat</label>
+                                <div class="input-group">
+                                    <input type="number" step="0.01" class="form-control" id="UnitPrice" placeholder="0.00" asp-for="UnitPrice" required />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-light text-dark">TL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="TotalPrice">Toplam Fiyat</label>
+                                <div class="input-group">
+                                    <input type="number" step="0.01" class="form-control" id="TotalPrice" placeholder="0.00" asp-for="TotalPrice" required />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text bg-light text-dark">TL</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Status">Sipariş Durumu</label>
+                        <input type="text" class="form-control" id="Status" placeholder="Sipariş Durumunu Giriniz (Örn: Hazırlanıyor)" asp-for="Status" required />
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-success mr-2">Siparişi Güncelle</button>
+                        <a asp-action="OrderList" class="btn btn-light">İptal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

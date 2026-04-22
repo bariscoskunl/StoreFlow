@@ -1,0 +1,100 @@
+﻿@model List<OrderDateViewModel>
+@using Newtonsoft.Json
+
+@{
+    var dateLabels = Model.Select(x => x.Date).ToList();
+    var orderCounts = Model.Select(x => x.Count).ToList();
+}
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h4 class="card-title mb-0">
+                    <i class="mdi mdi-chart-line text-info mr-2"></i>Günlük Sipariş Trendleri
+                </h4>
+                <div class="dropdown">
+                    <button class="btn btn-outline-light btn-sm text-dark border-0" type="button" id="chartOptions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-dots-vertical"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="chart-container" style="position: relative; height:350px; width:100%">
+                <canvas id="orders-chart-date-status"></canvas>
+            </div>
+            
+            <div class="mt-4 text-muted small">
+                <i class="mdi mdi-information-outline mr-1"></i>
+                Son günlerdeki sipariş yoğunluğunu ve satış ivmesini takip edebilirsiniz.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+    const labels = @Html.Raw(JsonConvert.SerializeObject(dateLabels));
+    const counts = @Html.Raw(JsonConvert.SerializeObject(orderCounts));
+
+    const ctx = document.getElementById('orders-chart-date-status').getContext('2d');
+        
+    // Gradient oluşturma
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(75, 192, 192, 0.4)');
+    gradient.addColorStop(1, 'rgba(75, 192, 192, 0)');
+
+    new Chart(ctx, {
+    type: 'line',
+    data: {
+    labels: labels,
+    datasets: [{
+    label: 'Günlük Sipariş Sayısı',
+    data: counts,
+    fill: true,
+    backgroundColor: gradient,
+    borderColor: 'rgba(75, 192, 192, 1)',
+    borderWidth: 3,
+    tension: 0.4,
+    pointRadius: 4,
+    pointBackgroundColor: '#fff',
+    pointBorderColor: 'rgba(75, 192, 192, 1)',
+    pointHoverRadius: 6
+    }]
+    },
+    options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+    legend: {
+    display: false
+    }
+    },
+    scales: {
+    x: {
+    grid: {
+    display: false
+    },
+    title: {
+    display: true,
+    text: 'Tarih',
+    font: { weight: 'bold' }
+    }
+    },
+    y: {
+    beginAtZero: true,
+    ticks: {
+    stepSize: 1
+    },
+    title: {
+    display: true,
+    text: 'Sipariş Sayısı',
+    font: { weight: 'bold' }
+    }
+    }
+    }
+    }
+    });
+    });
+</script>

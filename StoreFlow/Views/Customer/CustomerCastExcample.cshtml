@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "CustomerCastExcample";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Müşteri Cast Örneği</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Müşteri Adı Soyadı</th>
+                                <th>Şehir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ((IEnumerable<object>)ViewBag.v).Cast<Customer>())
+                            {
+                                <tr>
+                                    <td>@item.CustomerName @item.CustomerSurname</td>
+                                    <td><label class="badge badge-info">@item.CustomerCity</label></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

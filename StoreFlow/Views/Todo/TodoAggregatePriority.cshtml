@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "TodoAggregatePriority";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Birincil Öncelikli Görev Analizi</h4>
+                <p class="card-description">Sistemdeki görevler arasında en yüksek önceliğe sahip olan kayıtlar listelenmektedir.</p>
+
+                <div class="d-flex align-items-center mt-4 p-3 bg-light rounded border">
+                    <div class="bg-gradient-danger p-3 rounded mr-3">
+                        <i class="mdi mdi-alert-decagram text-white icon-md"></i>
+                    </div>
+                    <div>
+                        <h6 class="mb-1 text-muted">En Yüksek Öncelikli Görev:</h6>
+                        <h3 class="font-weight-bold mb-0 text-dark">
+                            @if (ViewBag.Result != null)
+                            {
+                                @ViewBag.Result
+                            }
+                            else
+                            {
+                                <span class="text-muted italic">Kayıt bulunamadı.</span>
+                            }
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-2 border-top">
+                    <p class="text-small text-muted">

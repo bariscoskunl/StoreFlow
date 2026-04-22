@@ -1,0 +1,54 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8 grid-margin stretch-card mx-auto">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="mb-4">
+                    <i class="mdi mdi-alert-circle-outline text-danger display-1"></i>
+                </div>
+                
+                <h2 class="text-danger font-weight-bold">Hata Oluştu!</h2>
+                <h4 class="card-description">İsteğiniz işlenirken bir sorun meydana geldi.</h4>
+
+                <div class="alert alert-fill-danger mt-4 text-left" role="alert">
+                    <i class="mdi mdi-information-outline mr-2"></i>
+                    Sistem şu anda bu talebi karşılayamıyor. Lütfen daha sonra tekrar deneyiniz veya yönetici ile iletişime geçiniz.
+                </div>
+
+                @if (Model.ShowRequestId)
+                {
+                    <div class="bg-light p-3 rounded mt-3 text-left border">
+                        <p class="mb-0 text-muted">
+                            <strong class="text-dark">İstek ID:</strong>
+                            <code class="text-primary font-weight-bold">@Model.RequestId</code>
+                        </p>
+                    </div>
+                }
+
+                <div class="mt-5 border-top pt-4 text-left">
+                    <h5 class="text-dark"><i class="mdi mdi-bug mr-2"></i>Geliştirme Modu (Development Mode)</h5>
+                    <p class="text-small text-muted">
+                        Uygulamayı <strong>Geliştirme</strong> ortamına geçirmek, oluşan hata hakkında daha detaylı bilgi görüntülenmesini sağlar.
+                    </p>
+                    <div class="alert alert-warning py-2">
+                        <small>
+                            <strong>Uyarı:</strong> Geliştirme ortamı canlıya alınmış (deployed) uygulamalarda etkinleştirilmemelidir.
+                            Bu durum, son kullanıcılara istisnalardan (exceptions) kaynaklı hassas bilgilerin gösterilmesine neden olabilir.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+                        <i class="mdi mdi-home mr-1"></i> Ana Sayfaya Dön
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

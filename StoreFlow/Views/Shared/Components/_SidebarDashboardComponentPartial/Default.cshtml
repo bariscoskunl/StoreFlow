@@ -1,0 +1,107 @@
+﻿@model Customer
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <div class="nav-link">
+                <div class="profile-image">
+                    <img src="/Melody-Premium-Bootstrap-Admin-Dashboard-Template/images/faces/face16.jpg" alt="image" />
+                </div>
+                <div class="profile-name">
+                    <p class="name">Hoş Geldin, Barış</p>
+                    <p class="designation">Super Admin</p>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
+                <i class="mdi mdi-view-dashboard menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#product-menu" aria-expanded="false" aria-controls="product-menu">
+                <i class="mdi mdi-cube-outline menu-icon"></i>
+                <span class="menu-title">Ürün Yönetimi</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="product-menu">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Product" asp-action="ProductList">Tüm Ürünler</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Product" asp-action="ProductListWithCategory">Ürün & Kategori (Join)</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Product" asp-action="First5ProductList">İlk 5 Ürün</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Product" asp-action="First4ProductList">İlk 4 Ürün</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Product" asp-action="Skip4ProductList">4 Ürün Atla</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Product" asp-action="ProductCount">Ürün İstatistikleri</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Category" asp-action="CategoryList">
+                <i class="mdi mdi-format-list-bulleted-type menu-icon"></i>
+                <span class="menu-title">Kategoriler</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Order" asp-action="OrderList">
+                <i class="mdi mdi-cart-outline menu-icon"></i>
+                <span class="menu-title">Sipariş Listesi</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#customer-menu" aria-expanded="false" aria-controls="customer-menu">
+                <i class="mdi mdi-account-group menu-icon"></i>
+                <span class="menu-title">Müşteri Yönetimi</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="customer-menu">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Customer" asp-action="CustomerListOrderByCustomerName">İsme Göre Sıralı</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Customer" asp-action="CustomerListOrderByDescBalance">Bakiyeye Göre Sıralı</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Customer" asp-action="CustomerGetByCity">Şehre Göre Filtrele</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#todo-menu" aria-expanded="false" aria-controls="todo-menu">
+                <i class="mdi mdi-playlist-check menu-icon"></i>
+                <span class="menu-title">Yapılacaklar & LINQ</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="todo-menu">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Todo" asp-action="TodoList">Görev Listesi</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Todo" asp-action="IncompleteTask">Tamamlanmayanlar</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Todo" asp-action="TodoAggregatePriority">Öncelik Birleştir (Aggregate)</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-controller="Todo" asp-action="TodoChunk">Gruplandır (Chunk)</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Order" asp-action="AllStockSmallerThen5">
+                <i class="mdi mdi-alert-outline menu-icon text-warning"></i>
+                <span class="menu-title">Kritik Stok Takibi</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Message" asp-action="MessageList">
+                <i class="mdi mdi-email-outline menu-icon"></i>
+                <span class="menu-title">Mesajlar</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Order" asp-action="OrderListSearch">
+                <i class="mdi mdi-magnify menu-icon"></i>
+                <span class="menu-title">Sipariş Arama</span>
+            </a>
+        </li>
+    </ul>
+</nav>

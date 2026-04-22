@@ -1,0 +1,39 @@
+﻿@model bool
+@{
+    ViewData["Title"] = "AllStockSmallerThen5";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tüm Stoklar 5 ve 5'ten Küçük Mü?</h4>
+                <p class="card-description">Sistemdeki siparişlerin stok miktarlarının kritik seviyede olup olmadığını kontrol eder.</p>
+               
+                <div class="mt-4 @(TempData["message"] == null && TempData["error"] == null ? "d-none" : "")">
+
+                    @if (TempData["message"] != null)
+                    {
+                        <div class="alert alert-fill-success d-flex align-items-center" role="alert">
+                            <i class="mdi mdi-check-circle mr-2"></i>
+                            <span>@TempData["message"]</span>
+                        </div>
+                    }
+
+                    @if (TempData["error"] != null)
+                    {
+                        <div class="alert alert-fill-danger d-flex align-items-center" role="alert">
+                            <i class="mdi mdi-alert-circle mr-2"></i>
+                            <span>@TempData["error"]</span>
+                        </div>
+                    }
+                </div>
+
+                <div class="mt-3">
+                    <a asp-action="OrderList" class="btn btn-light btn-block">Sipariş Listesine Dön</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model List<Product>
+
+<div class="col-md-5 grid-margin stretch-card">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title">
+                <i class="mdi mdi-plus-box-outline text-success mr-2"></i>
+                Sisteme Eklenen Son Ürünler
+            </h4>
+            <p class="card-description">En son kaydedilen ürünlerin fiyat ve stok bilgilerine genel bakış.</p>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="font-weight-bold">Ürün Adı</th>
+                            <th class="font-weight-bold">Birim Fiyat</th>
+                            <th class="font-weight-bold text-center">Stok Durumu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="py-2 text-dark font-weight-medium">
+                                        <i class="mdi mdi-label-outline text-muted small mr-1"></i> @item.ProductName
+                                    </td>
+                                    <td>
+                                        <span class="text-primary font-weight-bold">@item.ProductPrice.ToString("C2")</span>
+                                    </td>
+                                    <td class="text-center">
+                                        @if (item.ProductStock <= 10)
+                                        {
+                                            <label class="badge badge-danger badge-pill">Kritik: @item.ProductStock</label>
+                                        }
+                                        else if (item.ProductStock <= 50)
+                                        {
+                                            <label class="badge badge-warning badge-pill">@item.ProductStock</label>
+                                        }
+                                        else
+                                        {
+                                            <label class="badge badge-outline-success badge-pill">@item.ProductStock Adet</label>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="3" class="text-center text-muted py-4">Gösterilecek ürün kaydı bulunamadı.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4 pt-2 border-top">
+                <a asp-controller="Product" asp-action="ProductList" class="btn btn-block btn-outline-info btn-sm">
+                    Tüm Envanteri Görüntüle
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
